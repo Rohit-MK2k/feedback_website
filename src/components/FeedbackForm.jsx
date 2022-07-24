@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import Rating from './Rating'
 import Card from './Shared/Card'
 
 function FeedbackForm() {
   const [text, setText] = useState()
   const [isDisable, setIsDisable] = useState(true)
   const [message, setMessage] = useState("")
+  const [select, setSelect] = useState(10)
+  let row = []
   const handleText = (e) =>{
     setText(e.target.value)
     if(text === " "){
@@ -20,12 +23,21 @@ function FeedbackForm() {
       setMessage(null)
     }
   }
+  const handleSelect = (value) =>{
+    setSelect(parseInt(value,10))
+  }
+  for (let i = 1; i <= 10; i++) {
+    row.push(<Rating value = {i} isSelect = {select} handleSelect = {handleSelect}/>);
+  }
 
-   return (
+  return (
     
     <Card>
       <form action="">
         <h3>Rate and give feedback to this website</h3>
+        <ul className='rating'>
+          {row}
+        </ul>
         <div className="input">
           <input type="text" onChange={handleText} name="feedback" id="feedback" placeholder='Enter your feedback' value={text}/> 
           <input type="submit" value="Submit" disabled = {isDisable} /> 
