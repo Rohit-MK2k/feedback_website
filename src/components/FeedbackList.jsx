@@ -1,10 +1,13 @@
 
 import FeedbackItems from './FeedbackItems'
+import {useContext} from 'react'
+import feedbackContext from '../FeedbackContext'
 
-function FeedbackList({feedback, handleDelete}) {
+function FeedbackList() {
+    const {feedback} = useContext(feedbackContext)
     return (
         feedback.map((item) =>(
-            <FeedbackItems key = {item.id} item={item} handleDelete = {handleDelete}/>
+            <FeedbackItems key = {item.id} item={item}/>
         ))
     )
 }

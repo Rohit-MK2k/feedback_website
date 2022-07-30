@@ -1,6 +1,9 @@
 import React from 'react'
+import {useContext} from 'react'
+import feedbackContext from '../FeedbackContext'
 
-function FeedbackStat({feedback}) {
+function FeedbackStat() {
+    const {feedback} = useContext(feedbackContext)
     let review
     if(feedback.length === 0){
         review = "No"
