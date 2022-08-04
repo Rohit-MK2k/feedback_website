@@ -63,14 +63,21 @@ body{
 .text-display{
     font-size: 16px;
 }
-.cross{
-    border: none;
-    background-color: transparent;
+.corner-btn{
+    display: flex;
+    flex-direction: row;
     position: absolute;
     top: 18px;
     right: 26px;
-    cursor: pointer;
 }
+.cross,
+.edit{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 1px;
+}
+
 .feedback-stat{
     display: flex;
     flex-direction: row;

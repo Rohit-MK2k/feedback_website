@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Rating from './Rating'
 import Card from './Shared/Card'
 import feedbackContext from '../FeedbackContext'
@@ -8,7 +8,7 @@ function FeedbackForm() {
   const [isDisable, setIsDisable] = useState(true)
   const [message, setMessage] = useState("")
   const [select, setSelect] = useState(10)
-  const {addFeedback} = useContext(feedbackContext)
+  const {addFeedback, newFeedback, updateFeedback} = useContext(feedbackContext)
   
   let row = []
   
@@ -36,13 +36,26 @@ function FeedbackForm() {
   const handleSubmit = (e) =>{
     e.preventDefault()
     if(text.trim().length > 10){
-      const newFeedback ={
+      const feedbackContent ={
         feedback: text,
         rating: select
       }
-      addFeedback(newFeedback)
+      if(newFeedback.edit === true){
+        updateFeedback(newFeedback.item.id, feedbackContent)
+      }
+      else{
+        addFeedback(feedbackContent)
+      }
+      setText('')
     }
   }
+  useEffect(() =>{
+    if(newFeedback.edit === true){
+      setIsDisable(false)
+      setText(newFeedback.item.feedback)
+      setSelect(newFeedback.item.rating)
+    }
+  },[newFeedback])
 
   return (
     <Card>
